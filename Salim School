@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class SchoolManagementSystem {
+    private List<String> grades;
+
+    public SchoolManagementSystem() {
+        grades = new ArrayList<>();
+    }
+
+    public void assignGrade(String studentName, int grade) {
+        try {
+            if (grade < 0 || grade > 100) {
+                throw new IllegalArgumentException("Invalid grade: " + grade);
+            }
+            // If grade is valid, add it to the list
+            grades.add(studentName + ": " + grade);
+            System.out.println("Grade assigned successfully to " + studentName);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            System.out.println("Grade assignment attempted for " + studentName);
+        }
+    }
+
+    public static void main(String[] args) {
+        SchoolManagementSystem system = new SchoolManagementSystem();
+
+        // Attempt to assign valid and invalid grades
+        system.assignGrade("Alice", 85); // Valid grade
+        system.assignGrade("Bob", 110); // Invalid grade
+        system.assignGrade("Charlie", -5); // Invalid grade
+    }
+}
